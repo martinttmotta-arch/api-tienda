@@ -1,5 +1,6 @@
 {
   "name": "api-tienda",
+  "version": "1.0.0",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
