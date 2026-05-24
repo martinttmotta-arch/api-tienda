@@ -1,5 +1,4 @@
 const express = require('express')
-const ordenesRouter = require('./routes/ordenes')
 require('./db')
 
 const app = express()
