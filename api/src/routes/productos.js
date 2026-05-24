@@ -15,7 +15,7 @@ router.get('/', async, authMiddleware, esAdmin, (req, res) =>{
 })
 
 //POST crear productos
-router.post('/', authMiddleware,, esAdmin, async (req, res) => {
+router.post('/', authMiddleware, esAdmin, async (req, res) => {
     const {nombre, precio, stock } = req.body
     try{
         const result = await pool.query(
