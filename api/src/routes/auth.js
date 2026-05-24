@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
         const valido = await bcrypt.compare(password, usuario.password)
         if (!valido) return res.status(401).json({ error: 'Constrasena incorrecta'})
         
-        const token = jwt.sign({ id: usuario.id, email: usuario.email , role: usuario.role }, process.env.JWT_SECRET, { expiresIn: '24h'})
+        const token = jwt.sign({ id: usuario.id, email: usuario.email , rol: usuario.rol }, process.env.JWT_SECRET, { expiresIn: '24h'})
         res.json({token})
     }catch (err){
         res.status(500).json({ error: err.message})
