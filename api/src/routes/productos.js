@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/auth')
 const esAdmin = require('../middleware/esAdmin')
 
 //GET de todos los productos
-router.get('/', async, authMiddleware, esAdmin, (req, res) =>{
+router.get('/',  authMiddleware, esAdmin, async (req, res) =>{
     try{
         const result = await pool.query('SELECT * FROM  productos')
         res.json(result.rows)
