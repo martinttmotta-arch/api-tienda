@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const pool = require('../db.js')
 const authMiddleware = require('../middleware/auth')
+const esAdmin = require('../middleware/esAdmin')
 
 //GET de todos los productos
-router.get('/', async (req, res) =>{
+router.get('/', async, authMiddleware, esAdmin, (req, res) =>{
     try{
         const result = await pool.query('SELECT * FROM  productos')
         res.json(result.rows)
@@ -14,7 +15,7 @@ router.get('/', async (req, res) =>{
 })
 
 //POST crear productos
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', authMiddleware,, esAdmin, async (req, res) => {
     const {nombre, precio, stock } = req.body
     try{
         const result = await pool.query(
@@ -27,7 +28,7 @@ router.post('/', authMiddleware, async (req, res) => {
 })
 
 //PUT actualizar productos 
-router.put('/:id', authMiddleware, async (req, res) =>{
+router.put('/:id', authMiddleware, esAdmin, async (req, res) =>{
     const { id } = req.params
     const { nombre, precio, stock} = req.body
     try{
@@ -42,7 +43,7 @@ router.put('/:id', authMiddleware, async (req, res) =>{
 })
 
 //DELETE eliminar productos
-router.delete('/:id', authMiddleware, async (req, res) =>{
+router.delete('/:id', authMiddleware, esAdmin,  async (req, res) =>{
     const { id } = req.params
     try {
         const result = await pool.query('DELETE FROM productos WHERE id=$1 RETURNING*', [id])
